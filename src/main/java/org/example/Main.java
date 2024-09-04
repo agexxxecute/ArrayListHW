@@ -10,6 +10,10 @@ public class Main {
         for(int i = 0; i < 20; i++){
             myArrayList.add(i*i);
         }
+        myArrayList.changeElement(100, 5);
+        myArrayList.changeElement(100,50);
+        myArrayList.print();
+        myArrayList.clear();
         myArrayList.print();
 
     }
