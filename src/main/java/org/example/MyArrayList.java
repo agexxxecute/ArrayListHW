@@ -97,6 +97,12 @@ public class MyArrayList<T> {
         } else pointer = newLength;
     }
 
+    public void sort(Comparator <? super T> comparator){
+        QuickSort.quickSort(list, 0, pointer-1, comparator);
+    }
+
+
+
     /**
      * Prints the full list to the console
      */
