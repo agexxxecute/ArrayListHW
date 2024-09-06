@@ -11,23 +11,29 @@ class MyArrayListTest {
         myArrayList.add(1);
         myArrayList.add(3);
         myArrayList.add(4);
-        myArrayList.add(2,1);
+        myArrayList.addByIndex(2,1);
         String result = myArrayList.toString();
         String correctResult = "1 2 3 4 ";
         assertEquals(correctResult, result);
     }
 
     @Test
-    void addALotOfElements() {
+    void addAndDeleteALotOfElements() {
         String result = "";
         int newElement;
         MyArrayList<Integer> myArrayList = new MyArrayList<>();
         for(int i = 0; i < 1000; i++){
-            newElement = (int)Math.random()*100;
+            newElement = (int)(Math.random()*100);
             myArrayList.add(newElement);
             result+=newElement + " ";
         }
+
         assertEquals(result, myArrayList.toString());
+        int lastElement = (int)myArrayList.getElement(999);
+        for (int i = 0; i < 999; i++){
+            myArrayList.deleteByIndex(0);
+        }
+        assertEquals(lastElement, myArrayList.getElement(0));
     }
 
     @Test
@@ -55,14 +61,26 @@ class MyArrayListTest {
     }
 
     @Test
-    void delete() {
+    void deleteByIndex() {
         MyArrayList<Integer> myArrayList = new MyArrayList<>();
         myArrayList.add(1);
         myArrayList.add(2);
         myArrayList.add(3);
         myArrayList.add(3);
         myArrayList.add(4);
-        myArrayList.delete(3);
+        myArrayList.deleteByIndex(3);
+        assertEquals("1 2 3 4 ", myArrayList.toString());
+    }
+
+    @Test
+    void deleteElement() {
+        MyArrayList<Integer> myArrayList = new MyArrayList<>();
+        myArrayList.add(1);
+        myArrayList.add(2);
+        myArrayList.add(3);
+        myArrayList.add(3);
+        myArrayList.add(4);
+        myArrayList.deleteElement(3);
         assertEquals("1 2 3 4 ", myArrayList.toString());
     }
 
@@ -97,5 +115,16 @@ class MyArrayListTest {
             myArrayList.add(i);
         }
         assertEquals(4, myArrayList.getElement(4));
+    }
+
+    @Test
+    void getElementException() {
+        MyArrayList<Integer> myArrayList = new MyArrayList<>();
+        myArrayList.add(1);
+        myArrayList.add(2);
+        myArrayList.add(3);
+        myArrayList.add(3);
+        myArrayList.add(4);
+        assertThrows(ArrayIndexOutOfBoundsException.class, () -> myArrayList.getElement(20));
     }
 }

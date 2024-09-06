@@ -2,7 +2,18 @@ package org.example;
 
 import java.util.Comparator;
 
+/**
+ * Sorts an array using the quicksort algorithm
+ */
 public class QuickSort {
+    /**
+     * Sorts an array using the quicksort algorithm
+     * @param arr an array to be sorted
+     * @param low first element of the array
+     * @param high last element of the array
+     * @param comparator array type comparator
+     * @param <T>
+     */
     public static <T> void quickSort (T[] arr, int low, int high, Comparator <? super  T> comparator){
         if(low < high){
             int pi = partition(arr, low, high, comparator);

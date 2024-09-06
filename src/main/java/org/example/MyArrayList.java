@@ -31,7 +31,7 @@ public class MyArrayList<T> {
      * @param element Element to be added
      * @param index Index of a new element
      */
-    public void add (T element, int index){
+    public void addByIndex (T element, int index){
         if (pointer == list.length-1){
             resize(list.length + list.length/2);
         }
@@ -52,7 +52,25 @@ public class MyArrayList<T> {
         try{
             return list[index];
         } catch (ArrayIndexOutOfBoundsException e){
-            return null;
+            throw e;
+        }
+    }
+
+    /**
+     * Deletes the first occurrence of an element in array list
+     * @param element deleting element
+     */
+    public void deleteElement(T element){
+        boolean flag = false;
+        for(int i = 0; i<pointer; i++){
+            if(list[i].equals(element)){
+                deleteByIndex(i);
+                flag=true;
+                break;
+            }
+        }
+        if(!flag){
+            System.out.println("No such element");
         }
     }
 
@@ -60,7 +78,7 @@ public class MyArrayList<T> {
      * Deletes an element by index
      * @param index Index of the deleting element
      */
-    public void delete (int index) throws ArrayIndexOutOfBoundsException{
+    public void deleteByIndex (int index) throws ArrayIndexOutOfBoundsException{
         try {
             for (int i = index; i < pointer - 1; i++) {
                 list[i] = list[i + 1];
