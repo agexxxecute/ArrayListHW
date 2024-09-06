@@ -4,6 +4,10 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Comparator;
 
+/**
+ * Resizable array
+ * @param <T>
+ */
 public class MyArrayList<T> {
     private final int DEFAULT_SIZE = 16;
     private T[] list;
@@ -58,13 +62,17 @@ public class MyArrayList<T> {
      * Deletes an element by index
      * @param index Index of the deleting element
      */
-    public void delete (int index){
-        for(int i = index; i < pointer-1; i++){
-            list[i] = list[i+1];
-        }
-        pointer--;
-        if(pointer < list.length/2){
-            resize(list.length - list.length/4);
+    public void delete (int index) throws ArrayIndexOutOfBoundsException{
+        try {
+            for (int i = index; i < pointer - 1; i++) {
+                list[i] = list[i + 1];
+            }
+            pointer--;
+            if (pointer < list.length / 2) {
+                resize(list.length - list.length / 4);
+            }
+        } catch (ArrayIndexOutOfBoundsException e){
+            throw e;
         }
     }
 
@@ -78,7 +86,7 @@ public class MyArrayList<T> {
         try{
             list[index] = element;
         } catch (ArrayIndexOutOfBoundsException e){
-            System.out.println("No such element");
+            throw e;
         }
     }
 
@@ -97,6 +105,10 @@ public class MyArrayList<T> {
         } else pointer = newLength;
     }
 
+    /**
+     * Sorting array
+     * @param comparator Comparing objects
+     */
     public void sort(Comparator <? super T> comparator){
         QuickSort.quickSort(list, 0, pointer-1, comparator);
     }
@@ -114,6 +126,19 @@ public class MyArrayList<T> {
             System.out.println();
         }
         else System.out.println("Empty collection");
+    }
+
+    /**
+     * Returns ArrayList elements as String
+     * @return String of elements
+     */
+    public String toString(){
+        String result="";
+       for (int i = 0; i < pointer; i++) {
+                result+=list[i].toString();
+                result+=" ";
+       }
+        return result;
     }
 
 
