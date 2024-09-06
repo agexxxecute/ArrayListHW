@@ -1,7 +1,5 @@
 package org.example;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Comparator;
 
 /**
@@ -72,7 +70,6 @@ public class MyArrayList<T> {
                 resize(list.length - list.length / 4);
             }
         } catch (ArrayIndexOutOfBoundsException e){
-            throw e;
         }
     }
 
@@ -86,6 +83,7 @@ public class MyArrayList<T> {
         try{
             list[index] = element;
         } catch (ArrayIndexOutOfBoundsException e){
+            System.out.println("No such element");
             throw e;
         }
     }

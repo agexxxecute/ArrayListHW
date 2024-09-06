@@ -19,6 +19,19 @@ class MyArrayListTest {
     }
 
     @Test
+    void addALotOfElements() {
+        String result = "";
+        int newElement;
+        MyArrayList<Integer> myArrayList = new MyArrayList<>();
+        for(int i = 0; i < 1000; i++){
+            newElement = (int)Math.random()*100;
+            myArrayList.add(newElement);
+            result+=newElement + " ";
+        }
+        assertEquals(result, myArrayList.toString());
+    }
+
+    @Test
     void sort() {
         MyArrayList<Integer> myArrayList = new MyArrayList<>();
         for(int i = 20; i > 0; i--){
@@ -74,9 +87,16 @@ class MyArrayListTest {
         myArrayList.add(3);
         myArrayList.add(3);
         myArrayList.add(4);
-        assertThrows(ArrayIndexOutOfBoundsException.class, () -> {
-            myArrayList.changeElement(10,20);
-        });
+        assertThrows(ArrayIndexOutOfBoundsException.class, () -> myArrayList.changeElement(10,20));
 
+    }
+
+    @Test
+    void getElement() {
+        MyArrayList<Integer> myArrayList = new MyArrayList<>();
+        for(int i = 0; i < 5; i++){
+            myArrayList.add(i);
+        }
+        assertEquals(4, myArrayList.getElement(4));
     }
 }
