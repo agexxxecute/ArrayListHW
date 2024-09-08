@@ -2,6 +2,9 @@ package org.example;
 
 import org.junit.jupiter.api.Test;
 
+import java.io.ByteArrayOutputStream;
+import java.io.PrintStream;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class MyArrayListTest {
@@ -19,16 +22,17 @@ class MyArrayListTest {
 
     @Test
     void addAndDeleteALotOfElements() {
-        String result = "";
+        StringBuilder result = new StringBuilder();
         int newElement;
         MyArrayList<Integer> myArrayList = new MyArrayList<>();
         for(int i = 0; i < 1000; i++){
             newElement = (int)(Math.random()*100);
             myArrayList.add(newElement);
-            result+=newElement + " ";
+            result.append(newElement);
+            result.append(" ");
         }
 
-        assertEquals(result, myArrayList.toString());
+        assertEquals(result.toString(), myArrayList.toString());
         int lastElement = (int)myArrayList.getElement(999);
         for (int i = 0; i < 999; i++){
             myArrayList.deleteByIndex(0);
@@ -126,5 +130,21 @@ class MyArrayListTest {
         myArrayList.add(3);
         myArrayList.add(4);
         assertThrows(ArrayIndexOutOfBoundsException.class, () -> myArrayList.getElement(20));
+    }
+
+    @Test
+    void print() {
+        MyArrayList<Integer> myArrayList = new MyArrayList<>();
+        myArrayList.add(1);
+        myArrayList.add(2);
+        myArrayList.add(3);
+        myArrayList.add(3);
+        myArrayList.add(4);
+        ByteArrayOutputStream output = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(output));
+        myArrayList.print();
+        String result = output.toString().replaceAll("\n", "").replaceAll("\r", "");
+        assertEquals("1 2 3 3 4 ", result);
+        System.setOut(null);
     }
 }

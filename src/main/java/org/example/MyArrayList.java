@@ -49,18 +49,14 @@ public class MyArrayList<T> {
      * @throws ArrayIndexOutOfBoundsException
      */
     public Object getElement (int index) throws ArrayIndexOutOfBoundsException{
-        try{
             return list[index];
-        } catch (ArrayIndexOutOfBoundsException e){
-            throw e;
-        }
     }
 
     /**
      * Deletes the first occurrence of an element in array list
      * @param element deleting element
      */
-    public void deleteElement(T element){
+    public boolean deleteElement(T element){
         boolean flag = false;
         for(int i = 0; i<pointer; i++){
             if(list[i].equals(element)){
@@ -69,9 +65,7 @@ public class MyArrayList<T> {
                 break;
             }
         }
-        if(!flag){
-            System.out.println("No such element");
-        }
+        return flag;
     }
 
     /**
@@ -79,7 +73,6 @@ public class MyArrayList<T> {
      * @param index Index of the deleting element
      */
     public void deleteByIndex (int index) throws ArrayIndexOutOfBoundsException{
-        try {
             for (int i = index; i < pointer - 1; i++) {
                 list[i] = list[i + 1];
             }
@@ -87,8 +80,6 @@ public class MyArrayList<T> {
             if (pointer < list.length / 2) {
                 resize(list.length - list.length / 4);
             }
-        } catch (ArrayIndexOutOfBoundsException e){
-        }
     }
 
     /**
@@ -98,12 +89,7 @@ public class MyArrayList<T> {
      * @throws ArrayIndexOutOfBoundsException
      */
     public void changeElement (T element, int index) throws ArrayIndexOutOfBoundsException{
-        try{
             list[index] = element;
-        } catch (ArrayIndexOutOfBoundsException e){
-            System.out.println("No such element");
-            throw e;
-        }
     }
 
     /**
@@ -149,12 +135,12 @@ public class MyArrayList<T> {
      * @return String of elements
      */
     public String toString(){
-        String result="";
+        StringBuilder result = new StringBuilder();
        for (int i = 0; i < pointer; i++) {
-                result+=list[i].toString();
-                result+=" ";
+                result.append(list[i].toString());
+                result.append(" ");
        }
-        return result;
+        return result.toString();
     }
 
 
